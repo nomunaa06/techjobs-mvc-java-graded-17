@@ -4,10 +4,7 @@ import org.launchcode.techjobsmvc.models.Job;
 import org.launchcode.techjobsmvc.models.JobData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -32,6 +29,7 @@ public class SearchController {
     @PostMapping(value ="results")
     public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
         ArrayList<Job> jobs =new ArrayList<>();
+        model.addAttribute("columns", columnChoices);
         if(searchType.equals("all" ) && searchTerm.isEmpty()){
             jobs = JobData.findAll();
             model.addAttribute("title", "Jobs With All");
